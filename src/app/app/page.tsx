@@ -1,138 +1,241 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Heart, MessageCircle, Video, Users, Star, TrendingUp, Clock, Gift } from 'lucide-react';
+import './home.css';
 
-export default function AppHome() {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+interface QuickAction {
+  id: string;
+  title: string;
+  description: string;
+  icon: any;
+  href: string;
+  color: string;
+  bgColor: string;
+}
 
-  useEffect(() => {
-    // Simulate loading and authentication check
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+interface Activity {
+  id: string;
+  type: 'like' | 'message' | 'follow' | 'gift';
+  user: string;
+  content: string;
+  timestamp: string;
+  avatar: string;
+}
 
-    return () => clearTimeout(timer);
-  }, []);
+export default function HomePage() {
+  const [user] = useState({
+    name: 'Usuário Premium',
+    coins: 1250,
+    level: 'Premium',
+    avatar: '/avatars/user.jpg',
+  });
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-carnation-pink rounded-full animate-bounce">
-            <span className="text-4xl">💕</span>
-          </div>
-          <h2 className="text-3xl font-black uppercase text-french-rose">
-            CARREGANDO...
-          </h2>
-        </div>
-      </div>
-    );
-  }
+  const [quickActions] = useState<QuickAction[]>([
+    {
+      id: '1',
+      title: 'Feed',
+      description: 'Veja conteúdo exclusivo',
+      icon: Heart,
+      href: '/app/feed',
+      color: 'text-red-400',
+      bgColor: 'bg-red-500/20',
+    },
+    {
+      id: '2',
+      title: 'Chat',
+      description: 'Conversas íntimas',
+      icon: MessageCircle,
+      href: '/app/chat',
+      color: 'text-purple-400',
+      bgColor: 'bg-purple-500/20',
+    },
+    {
+      id: '3',
+      title: 'Vídeo Match',
+      description: 'Encontros aleatórios',
+      icon: Video,
+      href: '/app/match',
+      color: 'text-pink-400',
+      bgColor: 'bg-pink-500/20',
+    },
+    {
+      id: '4',
+      title: 'Perfil',
+      description: 'Configurar conta',
+      icon: Users,
+      href: '/app/profile',
+      color: 'text-blue-400',
+      bgColor: 'bg-blue-500/20',
+    },
+  ]);
+
+  const [recentActivity] = useState<Activity[]>([
+    {
+      id: '1',
+      type: 'like',
+      user: 'Ana Silva',
+      content: 'curtiu seu perfil',
+      timestamp: '2 min',
+      avatar: '/avatars/ana.jpg',
+    },
+    {
+      id: '2',
+      type: 'message',
+      user: 'Carlos Mendes',
+      content: 'enviou uma mensagem',
+      timestamp: '5 min',
+      avatar: '/avatars/carlos.jpg',
+    },
+    {
+      id: '3',
+      type: 'gift',
+      user: 'Marina Costa',
+      content: 'enviou um presente',
+      timestamp: '10 min',
+      avatar: '/avatars/marina.jpg',
+    },
+    {
+      id: '4',
+      type: 'follow',
+      user: 'João Santos',
+      content: 'começou a te seguir',
+      timestamp: '15 min',
+      avatar: '/avatars/joao.jpg',
+    },
+  ]);
+
+  const getActivityIcon = (type: string) => {
+    switch (type) {
+      case 'like':
+        return <Heart className="home-activity-icon" style={{ color: '#f87171' }} />;
+      case 'message':
+        return <MessageCircle className="home-activity-icon" style={{ color: '#a78bfa' }} />;
+      case 'gift':
+        return <Gift className="home-activity-icon" style={{ color: '#fbbf24' }} />;
+      case 'follow':
+        return <Users className="home-activity-icon" style={{ color: '#60a5fa' }} />;
+      default:
+        return <Star className="home-activity-icon" style={{ color: '#9ca3af' }} />;
+    }
+  };
+
+  const getActionIconColor = (id: string) => {
+    switch (id) {
+      case '1': return 'red';
+      case '2': return 'purple';
+      case '3': return 'pink';
+      case '4': return 'blue';
+      default: return 'red';
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Background romantic shapes */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-20 right-20 w-40 h-40 bg-french-rose rounded-full animate-pulse"></div>
-        <div className="absolute bottom-20 left-20 w-32 h-32 bg-carnation-pink rounded-3xl animate-bounce"></div>
-        <div className="absolute top-1/3 left-10 w-24 h-24 bg-pink rounded-lg rotate-45 animate-pulse"></div>
+    <div className="home-container">
+      {/* Header */}
+      <div className="home-header">
+        <div className="home-header-content">
+          <div className="home-greeting">
+            <h1>Olá, {user.name}! 👋</h1>
+            <p>Bem-vindo de volta</p>
+          </div>
+          <div className="home-user-info">
+            <div className="home-user-avatar-section">
+              <div className="home-user-avatar">
+                <span>
+                  {user.name.charAt(0)}
+                </span>
+              </div>
+              <div className="home-user-details">
+                <div className="home-user-level">{user.level}</div>
+                <div className="home-user-coins">{user.coins} moedas</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
-        <div className="text-center max-w-4xl">
-          {/* Welcome Section */}
-          <div className="mb-16">
-            <div className="w-32 h-32 mx-auto mb-8 flex items-center justify-center bg-carnation-pink rounded-full transform -rotate-12 hover:rotate-0 transition-transform duration-500">
-              <span className="text-6xl">🏠</span>
-            </div>
-            
-            <h1 className="text-7xl font-black uppercase mb-6 transform rotate-1 text-french-rose drop-shadow-lg">
-              💖 BEM-VINDO AO APP
-            </h1>
-            
-            <div className="p-6 inline-block transform -rotate-1 font-bold text-xl text-black max-w-2xl bg-misty-rose rounded-lg shadow-xl">
-              SUA JORNADA ÍNTIMA COMEÇA AQUI! EXPLORE TODAS AS FUNCIONALIDADES INCRÍVEIS!
-            </div>
+      {/* Quick Actions */}
+      <div className="home-content">
+        <h2 className="home-section-title">
+          <TrendingUp className="home-section-icon" />
+          Ações Rápidas
+        </h2>
+        
+        <div className="home-quick-actions">
+          {quickActions.map((action) => (
+            <Link
+              key={action.id}
+              href={action.href}
+              className="home-quick-action"
+            >
+              <div className="home-quick-action-content">
+                <div className={`home-quick-action-icon ${getActionIconColor(action.id)}`}>
+                  <action.icon style={{ width: '1.5rem', height: '1.5rem' }} />
+                </div>
+                <h3>{action.title}</h3>
+                <p>{action.description}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Stats Cards */}
+        <div className="home-stats">
+          <div className="home-stat-card">
+            <Heart className="home-stat-icon red" />
+            <div className="home-stat-value red">24</div>
+            <div className="home-stat-label">Curtidas</div>
           </div>
+          
+          <div className="home-stat-card">
+            <MessageCircle className="home-stat-icon purple" />
+            <div className="home-stat-value purple">12</div>
+            <div className="home-stat-label">Mensagens</div>
+          </div>
+          
+          <div className="home-stat-card">
+            <Users className="home-stat-icon blue" />
+            <div className="home-stat-value blue">156</div>
+            <div className="home-stat-label">Seguidores</div>
+          </div>
+        </div>
 
-          {/* Feature Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {/* Feed */}
-            <Link href="/app/feed">
-              <div className="p-8 text-black font-bold transform hover:scale-105 transition-all duration-300 cursor-pointer bg-orchid-pink rounded-xl shadow-xl hover:shadow-2xl border-4 border-french-rose">
-                <div className="text-5xl mb-4">📹</div>
-                <h3 className="text-2xl font-black uppercase mb-3">FEED</h3>
-                <p className="text-lg">
-                  VÍDEOS EXCLUSIVOS E CONTEÚDO SENSUAL
-                </p>
+        {/* Recent Activity */}
+        <h2 className="home-section-title">
+          <Clock className="home-section-icon" />
+          Atividade Recente
+        </h2>
+        
+        <div className="home-activity-list">
+          {recentActivity.map((activity) => (
+            <div key={activity.id} className="home-activity-item">
+              <div className="home-activity-content">
+                <div className="home-activity-avatar">
+                  <span>
+                    {activity.user.charAt(0)}
+                  </span>
+                </div>
+                
+                <div className="home-activity-details">
+                  <div className="home-activity-text">
+                    <span className="home-activity-user">{activity.user}</span>
+                    <span className="home-activity-action">{activity.content}</span>
+                  </div>
+                  <div className="home-activity-meta">
+                    {getActivityIcon(activity.type)}
+                    <span className="home-activity-time">{activity.timestamp} atrás</span>
+                  </div>
+                </div>
               </div>
-            </Link>
-
-            {/* Match */}
-            <Link href="/app/match">
-              <div className="p-8 text-black font-bold transform hover:scale-105 transition-all duration-300 cursor-pointer bg-carnation-pink rounded-xl shadow-xl hover:shadow-2xl border-4 border-french-rose">
-                <div className="text-5xl mb-4">💕</div>
-                <h3 className="text-2xl font-black uppercase mb-3">MATCH</h3>
-                <p className="text-lg">
-                  VIDEOCHAMADAS ROMÂNTICAS
-                </p>
-              </div>
-            </Link>
-
-            {/* Chat */}
-            <Link href="/app/chat">
-              <div className="p-8 text-black font-bold transform hover:scale-105 transition-all duration-300 cursor-pointer bg-pink rounded-xl shadow-xl hover:shadow-2xl border-4 border-french-rose">
-                <div className="text-5xl mb-4">💬</div>
-                <h3 className="text-2xl font-black uppercase mb-3">CHAT</h3>
-                <p className="text-lg">
-                  CONVERSAS ÍNTIMAS E PRIVADAS
-                </p>
-              </div>
-            </Link>
-
-            {/* Random */}
-            <Link href="/app/random">
-              <div className="p-8 text-black font-bold transform hover:scale-105 transition-all duration-300 cursor-pointer bg-cherry-blossom-pink rounded-xl shadow-xl hover:shadow-2xl border-4 border-french-rose">
-                <div className="text-5xl mb-4">🎲</div>
-                <h3 className="text-2xl font-black uppercase mb-3">RANDOM</h3>
-                <p className="text-lg">
-                  ENCONTROS ALEATÓRIOS EMOCIONANTES
-                </p>
-              </div>
-            </Link>
-
-            {/* Profile */}
+            </div>
+          ))}
+          
+          <div className="home-view-all">
             <Link href="/app/profile">
-              <div className="p-8 text-black font-bold transform hover:scale-105 transition-all duration-300 cursor-pointer bg-tickle-me-pink rounded-xl shadow-xl hover:shadow-2xl border-4 border-french-rose">
-                <div className="text-5xl mb-4">👤</div>
-                <h3 className="text-2xl font-black uppercase mb-3">PERFIL</h3>
-                <p className="text-lg">
-                  CONFIGURE SUA CONTA
-                </p>
-              </div>
+              Ver todas as atividades →
             </Link>
-
-            {/* Settings */}
-            <div className="p-8 text-black font-bold transform hover:scale-105 transition-all duration-300 cursor-pointer bg-bakermiller-pink rounded-xl shadow-xl hover:shadow-2xl border-4 border-french-rose">
-              <div className="text-5xl mb-4">⚙️</div>
-              <h3 className="text-2xl font-black uppercase mb-3">CONFIGURAÇÕES</h3>
-              <p className="text-lg">
-                PERSONALIZE SUA EXPERIÊNCIA
-              </p>
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className="p-8 inline-block transform rotate-1 font-bold text-black bg-french-rose rounded-xl shadow-2xl">
-            <h2 className="text-3xl font-black uppercase mb-4 text-white">
-              🌟 PRONTO PARA EXPLORAR?
-            </h2>
-            <p className="text-xl text-white">
-              ESCOLHA UMA OPÇÃO ACIMA E COMECE SUA AVENTURA!
-            </p>
           </div>
         </div>
       </div>

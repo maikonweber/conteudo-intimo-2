@@ -2,9 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FloatingShapes, AnimatedShape } from '@/components/ui/animated-shapes';
 
 type UserType = 'creator' | 'viewer';
 
@@ -30,139 +27,337 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white no-select">
-      {/* Background shapes usando componente reutilizável */}
-      <FloatingShapes density="high" opacity={0.15} />
-      
-      {/* Formas extras customizadas */}
-      <AnimatedShape 
-        variant="star" 
-        size="xl" 
-        color="french-rose" 
-        animation="heartbeat"
-        className="top-10 left-10"
-      />
-      <AnimatedShape 
-        variant="hexagon" 
-        size="lg" 
-        color="orchid-pink" 
-        animation="morph"
-        className="bottom-10 right-10"
-      />
+    <div style={{
+      minHeight: '100vh',
+      backgroundColor: '#000000',
+      color: '#ffffff',
+      userSelect: 'none',
+      WebkitUserSelect: 'none',
+      MozUserSelect: 'none',
+      msUserSelect: 'none',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      {/* Background shapes */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        opacity: 0.15,
+        zIndex: 1
+      }}>
+        {/* Floating shapes */}
+        <div style={{
+          position: 'absolute',
+          top: '2.5rem',
+          right: '2.5rem',
+          width: '6rem',
+          height: '6rem',
+          backgroundColor: 'var(--french-rose)',
+          clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
+          animation: 'heartbeat 2s ease-in-out infinite'
+        }} />
+        <div style={{
+          position: 'absolute',
+          bottom: '2.5rem',
+          left: '2.5rem',
+          width: '5rem',
+          height: '5rem',
+          backgroundColor: 'var(--orchid-pink)',
+          clipPath: 'polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%)',
+          animation: 'float 3s ease-in-out infinite'
+        }} />
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '10%',
+          width: '4rem',
+          height: '4rem',
+          backgroundColor: 'var(--carnation-pink)',
+          borderRadius: '50%',
+          animation: 'pulse 2s ease-in-out infinite'
+        }} />
+      </div>
 
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-6">
-        <div className="w-full max-w-lg">
+      <div style={{
+        position: 'relative',
+        zIndex: 10,
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1.5rem'
+      }}>
+        <div style={{
+          width: '100%',
+          maxWidth: '32rem'
+        }}>
           {/* Title Section */}
-          <div className="text-center mb-12">
-            <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center transform rotate-12 bg-french-rose rounded-full shadow-xl animate-heartbeat">
-              <span className="text-4xl">💘</span>
+          <div style={{
+            textAlign: 'center',
+            marginBottom: '3rem'
+          }}>
+            <div style={{
+              width: '6rem',
+              height: '6rem',
+              margin: '0 auto 1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transform: 'rotate(12deg)',
+              backgroundColor: 'var(--french-rose)',
+              borderRadius: '50%',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              animation: 'heartbeat 2s ease-in-out infinite'
+            }}>
+              <span style={{ fontSize: '2.5rem' }}>💘</span>
             </div>
             
-            <h1 className="text-6xl font-black uppercase mb-4 transform -rotate-1 text-french-rose drop-shadow-lg animate-float">
+            <h1 style={{
+              fontSize: '4rem',
+              fontWeight: 900,
+              textTransform: 'uppercase',
+              marginBottom: '1rem',
+              transform: 'rotate(-1deg)',
+              color: 'var(--french-rose)',
+              textShadow: '4px 4px 8px rgba(0, 0, 0, 0.5)',
+              animation: 'float 3s ease-in-out infinite'
+            }}>
               🌟 REGISTRAR
             </h1>
             
-            <div className="p-4 inline-block transform rotate-1 font-bold text-black bg-misty-rose rounded-lg shadow-lg animate-pulse">
+            <div style={{
+              padding: '1rem',
+              display: 'inline-block',
+              transform: 'rotate(1deg)',
+              fontWeight: 700,
+              color: '#000000',
+              backgroundColor: 'var(--misty-rose)',
+              borderRadius: '0.5rem',
+              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+              animation: 'pulse 2s ease-in-out infinite'
+            }}>
               CRIE SUA CONTA E EXPLORE!
             </div>
           </div>
 
-          {/* Form Container usando Card component */}
-          <Card variant="brutalist" animation="hover" className="transform -rotate-1">
-            <CardHeader>
-              <CardTitle className="text-2xl text-center animate-shake">
+          {/* Form Container */}
+          <div style={{
+            padding: '2rem',
+            transform: 'rotate(-1deg)',
+            backgroundColor: 'var(--misty-rose)',
+            borderRadius: '0.75rem',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 8px 8px 0px rgba(0,0,0,0.3)',
+            border: '4px solid #000000',
+            color: '#000000'
+          }}>
+            <div style={{
+              textAlign: 'center',
+              marginBottom: '2rem'
+            }}>
+              <h2 style={{
+                fontSize: '1.5rem',
+                fontWeight: 900,
+                textTransform: 'uppercase',
+                animation: 'shake 0.5s ease-in-out infinite'
+              }}>
                 💎 ESCOLHA SEU PERFIL
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-8">
-              {/* User Type Selection */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card 
-                  variant={userType === 'creator' ? 'gradient' : 'pink'}
-                  animation="hover"
-                  className={`cursor-pointer transition-all duration-300 ${
-                    userType === 'creator' ? 'ring-4 ring-misty-rose' : ''
-                  }`}
-                  onClick={() => setUserType('creator')}
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 mx-auto mb-3 flex items-center justify-center text-4xl bg-french-rose rounded-full animate-float">
-                      👑
-                    </div>
-                    <h4 className="text-xl font-black uppercase mb-2">
-                      CRIADOR
-                    </h4>
-                    <p className="text-sm font-bold">
-                      COMPARTILHE CONTEÚDO E GANHE DINHEIRO
-                    </p>
-                  </CardContent>
-                </Card>
+              </h2>
+            </div>
 
-                <Card 
-                  variant={userType === 'viewer' ? 'gradient' : 'pink'}
-                  animation="hover"
-                  className={`cursor-pointer transition-all duration-300 ${
-                    userType === 'viewer' ? 'ring-4 ring-misty-rose' : ''
-                  }`}
-                  onClick={() => setUserType('viewer')}
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 mx-auto mb-3 flex items-center justify-center text-4xl bg-carnation-pink rounded-full animate-float">
-                      💖
-                    </div>
-                    <h4 className="text-xl font-black uppercase mb-2">
-                      ESPECTADOR
-                    </h4>
-                    <p className="text-sm font-bold">
-                      ACESSE CONTEÚDO EXCLUSIVO
-                    </p>
-                  </CardContent>
-                </Card>
+            {/* User Type Selection */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gap: '1.5rem',
+              marginBottom: '2rem'
+            }}>
+              <div
+                style={{
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  padding: '1.5rem',
+                  textAlign: 'center',
+                  borderRadius: '0.5rem',
+                  backgroundColor: userType === 'creator' ? 'var(--french-rose)' : 'var(--pink)',
+                  border: userType === 'creator' ? '4px solid var(--misty-rose)' : '2px solid transparent',
+                  color: userType === 'creator' ? '#ffffff' : '#000000',
+                  transform: userType === 'creator' ? 'scale(1.05)' : 'scale(1)',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}
+                onClick={() => setUserType('creator')}
+              >
+                <div style={{
+                  width: '4rem',
+                  height: '4rem',
+                  margin: '0 auto 0.75rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '2.5rem',
+                  backgroundColor: 'var(--french-rose)',
+                  borderRadius: '50%',
+                  animation: 'float 3s ease-in-out infinite'
+                }}>
+                  👑
+                </div>
+                <h4 style={{
+                  fontSize: '1.25rem',
+                  fontWeight: 900,
+                  textTransform: 'uppercase',
+                  marginBottom: '0.5rem'
+                }}>
+                  CRIADOR
+                </h4>
+                <p style={{
+                  fontSize: '0.875rem',
+                  fontWeight: 700
+                }}>
+                  COMPARTILHE CONTEÚDO E GANHE DINHEIRO
+                </p>
               </div>
 
-              {/* Google Sign Up Button usando Button component */}
-              <Button
-                onClick={handleGoogleSignUp}
-                disabled={isLoading || !userType}
-                variant="brutalist"
-                size="xl"
-                animation="heartbeat"
-                className={`w-full ${
-                  userType ? 'hover:animate-pulse' : ''
-                }`}
+              <div
+                style={{
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  padding: '1.5rem',
+                  textAlign: 'center',
+                  borderRadius: '0.5rem',
+                  backgroundColor: userType === 'viewer' ? 'var(--french-rose)' : 'var(--pink)',
+                  border: userType === 'viewer' ? '4px solid var(--misty-rose)' : '2px solid transparent',
+                  color: userType === 'viewer' ? '#ffffff' : '#000000',
+                  transform: userType === 'viewer' ? 'scale(1.05)' : 'scale(1)',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}
+                onClick={() => setUserType('viewer')}
               >
-                <span className="text-2xl mr-4 animate-heartbeat">🌟</span>
-                {isLoading ? '⏳ CRIANDO...' : '🚀 CONTINUAR COM GOOGLE'}
-              </Button>
+                <div style={{
+                  width: '4rem',
+                  height: '4rem',
+                  margin: '0 auto 0.75rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '2.5rem',
+                  backgroundColor: 'var(--carnation-pink)',
+                  borderRadius: '50%',
+                  animation: 'float 3s ease-in-out infinite'
+                }}>
+                  💖
+                </div>
+                <h4 style={{
+                  fontSize: '1.25rem',
+                  fontWeight: 900,
+                  textTransform: 'uppercase',
+                  marginBottom: '0.5rem'
+                }}>
+                  ESPECTADOR
+                </h4>
+                <p style={{
+                  fontSize: '0.875rem',
+                  fontWeight: 700
+                }}>
+                  ACESSE CONTEÚDO EXCLUSIVO
+                </p>
+              </div>
+            </div>
 
-              {/* Warning for user type */}
-              {!userType && (
-                <Card variant="pink" animation="shake" className="transform rotate-1">
-                  <CardContent className="p-4 text-center">
-                    <p className="font-bold text-black">
-                      ⚠️ SELECIONE UM TIPO DE USUÁRIO PRIMEIRO!
-                    </p>
-                  </CardContent>
-                </Card>
-              )}
-            </CardContent>
-          </Card>
+            {/* Google Sign Up Button */}
+            <button
+              onClick={handleGoogleSignUp}
+              disabled={isLoading || !userType}
+              style={{
+                width: '100%',
+                height: '4rem',
+                backgroundColor: userType ? 'var(--french-rose)' : '#6b7280',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '0.75rem',
+                fontSize: '1.25rem',
+                fontWeight: 900,
+                textTransform: 'uppercase',
+                cursor: userType ? 'pointer' : 'not-allowed',
+                transition: 'all 0.3s ease',
+                boxShadow: '8px 8px 0px rgba(0,0,0,0.3)',
+                clipPath: 'polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)',
+                opacity: userType ? 1 : 0.5,
+                animation: userType ? 'heartbeat 2s ease-in-out infinite' : 'none',
+                marginBottom: '1rem'
+              }}
+            >
+              <span style={{ 
+                fontSize: '1.5rem', 
+                marginRight: '1rem',
+                animation: 'heartbeat 1s ease-in-out infinite'
+              }}>🌟</span>
+              {isLoading ? '⏳ CRIANDO...' : '🚀 CONTINUAR COM GOOGLE'}
+            </button>
+
+            {/* Warning for user type */}
+            {!userType && (
+              <div style={{
+                padding: '1rem',
+                textAlign: 'center',
+                backgroundColor: 'var(--pink)',
+                borderRadius: '0.5rem',
+                transform: 'rotate(1deg)',
+                animation: 'shake 2s ease-in-out infinite'
+              }}>
+                <p style={{
+                  fontWeight: 700,
+                  color: '#000000'
+                }}>
+                  ⚠️ SELECIONE UM TIPO DE USUÁRIO PRIMEIRO!
+                </p>
+              </div>
+            )}
+          </div>
 
           {/* Footer */}
-          <div className="text-center mt-8">
-            <Card variant="pink" animation="hover" className="transform rotate-1 inline-block">
-              <CardContent className="p-4">
-                <p className="font-bold text-black">
-                  JÁ TEM UMA CONTA?{' '}
-                  <Link
-                    href="/auth/signin"
-                    className="underline hover:no-underline transform hover:scale-105 transition-transform duration-200 inline-block text-french-rose hover:animate-shake"
-                  >
-                    ENTRAR AGORA! 💕
-                  </Link>
-                </p>
-              </CardContent>
-            </Card>
+          <div style={{
+            textAlign: 'center',
+            marginTop: '2rem'
+          }}>
+            <div style={{
+              display: 'inline-block',
+              padding: '1rem',
+              backgroundColor: 'var(--pink)',
+              borderRadius: '0.5rem',
+              transform: 'rotate(1deg)',
+              transition: 'transform 0.3s ease',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+            }}>
+              <p style={{
+                fontWeight: 700,
+                color: '#000000'
+              }}>
+                JÁ TEM UMA CONTA?{' '}
+                <Link
+                  href="/auth/signin"
+                  style={{
+                    textDecoration: 'underline',
+                    color: 'var(--french-rose)',
+                    transition: 'all 0.3s ease',
+                    display: 'inline-block'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.textDecoration = 'none';
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.animation = 'shake 0.5s ease-in-out infinite';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.textDecoration = 'underline';
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.animation = 'none';
+                  }}
+                >
+                  ENTRAR AGORA! 💕
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

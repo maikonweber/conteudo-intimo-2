@@ -1,0 +1,426 @@
+/* Random Chat Page Styles */
+.random-chat-container {
+  min-height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Background romantic shapes */
+.random-background-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+}
+
+.random-bg-shape-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16rem;
+  height: 16rem;
+  background-color: var(--french-rose);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.random-bg-shape-2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12rem;
+  height: 12rem;
+  background-color: var(--carnation-pink);
+  border-radius: 50% 60% 70% 40% / 60% 40% 50% 80%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.random-main-container {
+  position: relative;
+  z-index: 10;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Initial State - Brutal Style */
+.random-initial-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.random-initial-content {
+  text-align: center;
+  max-width: 32rem;
+}
+
+.random-initial-icon {
+  width: 8rem;
+  height: 8rem;
+  margin: 0 auto 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-12deg);
+  background-color: var(--carnation-pink);
+  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+}
+
+.random-initial-icon span {
+  font-size: 4rem;
+}
+
+.random-initial-title {
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  transform: rotate(1deg);
+  color: var(--french-rose);
+  text-shadow: 4px 4px 0px #000000;
+}
+
+.random-initial-description {
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transform: rotate(-1deg);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #000000;
+  background-color: var(--misty-rose);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.random-start-button {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 1.5rem;
+  padding: 1.5rem 3rem;
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background-color: var(--french-rose);
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.random-start-button:hover {
+  transform: rotate(1deg) scale(1.05);
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Searching State - Brutal Style */
+.random-searching-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.random-searching-content {
+  text-align: center;
+}
+
+.random-searching-icon {
+  width: 8rem;
+  height: 8rem;
+  margin: 0 auto 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--carnation-pink);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: heartbeat 1s ease-in-out infinite;
+}
+
+.random-searching-icon span {
+  font-size: 4rem;
+}
+
+.random-searching-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: var(--french-rose);
+  text-shadow: 2px 2px 0px #000000;
+}
+
+.random-searching-description {
+  padding: 1rem;
+  display: inline-block;
+  transform: rotate(1deg);
+  font-weight: 700;
+  color: #000000;
+  background-color: var(--orchid-pink);
+  clip-path: polygon(15px 0, 100% 0, 100% 100%, 0 100%, 0 15px);
+}
+
+/* Chat State - Header */
+.random-chat-header {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 8px solid var(--french-rose);
+  background-color: var(--orchid-pink);
+  color: #000000;
+}
+
+.random-chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.random-chat-header-icon {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  transform: rotate(-12deg);
+  background-color: var(--misty-rose);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
+}
+
+.random-chat-header-text h2 {
+  font-weight: 900;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.random-chat-header-text p {
+  font-size: 0.875rem;
+  font-weight: 700;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.random-chat-header-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.random-header-button {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.random-header-button:hover {
+  transform: scale(1.1);
+}
+
+.random-header-button.audio-enabled {
+  color: #ffffff;
+  background-color: var(--french-rose);
+  clip-path: polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%);
+}
+
+.random-header-button.audio-disabled {
+  color: #000000;
+  background-color: var(--misty-rose);
+  clip-path: polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%);
+}
+
+.random-header-button.end-call {
+  color: #ffffff;
+  background-color: var(--french-rose);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+/* Messages Area */
+.random-messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: #1f2937;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.random-message-wrapper {
+  display: flex;
+}
+
+.random-message-wrapper.me {
+  justify-content: flex-end;
+}
+
+.random-message-wrapper.system {
+  justify-content: center;
+}
+
+.random-message-wrapper.stranger {
+  justify-content: flex-start;
+}
+
+.random-message {
+  max-width: 20rem;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+
+.random-message:hover {
+  transform: scale(1.05);
+}
+
+.random-message.me {
+  color: #000000;
+  background-color: var(--carnation-pink);
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
+}
+
+.random-message.system {
+  color: #ffffff;
+  text-align: center;
+  background-color: var(--french-rose);
+  clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+}
+
+.random-message.stranger {
+  color: #000000;
+  background-color: var(--misty-rose);
+  clip-path: polygon(15px 0, 100% 0, 100% 100%, 0 100%, 0 15px);
+}
+
+.random-message-content p {
+  margin: 0;
+}
+
+.random-message-content audio {
+  width: 100%;
+}
+
+.random-message-content img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+
+.random-message-time {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+/* Input Area */
+.random-input-container {
+  padding: 1rem;
+  border-top: 8px solid var(--french-rose);
+  background-color: var(--orchid-pink);
+}
+
+.random-input-wrapper {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.random-input-button {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+  background-color: var(--french-rose);
+  border: none;
+  cursor: pointer;
+}
+
+.random-input-button:hover {
+  transform: scale(1.1);
+}
+
+.random-input-button.image {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.random-input-button.send {
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%);
+}
+
+.random-input-button.send:disabled {
+  opacity: 0.5;
+}
+
+.random-input-button.heart {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.random-text-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background-color: #000000;
+  color: #ffffff;
+  border: 4px solid var(--french-rose);
+  font-weight: 700;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+.random-text-input:focus {
+  outline: none;
+}
+
+.random-text-input::placeholder {
+  color: #9ca3af;
+}
+
+.random-file-input {
+  display: none;
+}
+
+/* Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Responsive Design */
+@media (min-width: 1024px) {
+  .random-message {
+    max-width: 28rem;
+  }
+}

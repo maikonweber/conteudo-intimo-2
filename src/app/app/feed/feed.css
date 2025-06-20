@@ -1,0 +1,311 @@
+/* Feed Page Styles */
+.feed-container {
+  height: 100vh;
+  background-color: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Video Container */
+.feed-video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.feed-video-background {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--french-rose), var(--carnation-pink), var(--orchid-pink));
+  background-size: 400% 400%;
+  animation: gradient-animation 15s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+@keyframes gradient-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.feed-video-content {
+  text-align: center;
+}
+
+.feed-video-icon {
+  width: 8rem;
+  height: 8rem;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.feed-video-icon span {
+  font-size: 3.5rem;
+}
+
+.feed-video-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.feed-video-creator {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Video Info Overlay */
+.feed-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, #000000, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.feed-overlay-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+/* Creator Info */
+.feed-creator-info {
+  flex: 1;
+}
+
+.feed-creator-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.feed-creator-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.125rem;
+  color: #000000;
+  background-color: var(--misty-rose);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+.feed-creator-details h3 {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.feed-creator-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feed-status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--french-rose);
+}
+
+.feed-status-text {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--carnation-pink);
+}
+
+.feed-description {
+  padding: 1rem;
+  font-weight: 700;
+  color: #000000;
+  background-color: var(--orchid-pink);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  max-width: 80%;
+  display: inline-block;
+}
+
+/* Action Buttons */
+.feed-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.feed-action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.feed-action-button:hover {
+  animation: heartbeat 1s ease-in-out infinite;
+}
+
+.feed-action-button.shake:hover {
+  animation: shake-animation 0.3s ease-in-out;
+}
+
+.feed-action-icon {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+
+.feed-action-icon.like {
+  background-color: var(--french-rose);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.feed-action-icon.like.liked {
+  background-color: var(--french-rose);
+}
+
+.feed-action-icon.like.not-liked {
+  background-color: var(--carnation-pink);
+}
+
+.feed-action-icon.like span {
+  font-size: 1.5rem;
+}
+
+.feed-action-icon.comment {
+  background-color: var(--carnation-pink);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
+}
+
+.feed-action-icon.comment span {
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+.feed-action-icon.share {
+  background-color: var(--carnation-pink);
+  clip-path: polygon(50% 0%, 80% 50%, 50% 100%, 20% 50%);
+}
+
+.feed-action-icon.share span {
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+.feed-action-icon.next {
+  background-color: var(--french-rose);
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%);
+}
+
+.feed-action-icon.next span {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.feed-action-count {
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 900;
+  text-shadow: 2px 2px 0px #000000;
+}
+
+/* Video Progress Indicator */
+.feed-progress {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.feed-progress-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.feed-progress-dot.active {
+  transform: scale(1.25);
+  background-color: var(--french-rose);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.feed-progress-dot.inactive {
+  background-color: var(--carnation-pink);
+  border-radius: 50%;
+}
+
+.feed-progress-dot.inactive:hover {
+  transform: scale(1.1);
+}
+
+/* Loading State */
+.feed-loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feed-loading-content {
+  text-align: center;
+}
+
+.feed-loading-icon {
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--carnation-pink);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+.feed-loading-icon span {
+  font-size: 2.5rem;
+}
+
+.feed-loading-title {
+  font-size: 1.875rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--french-rose);
+  text-shadow: 3px 3px 0px #000000;
+}
+
+.feed-loading-subtitle {
+  color: #9ca3af;
+  font-weight: 700;
+}
+
+@keyframes shake-animation {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+} 

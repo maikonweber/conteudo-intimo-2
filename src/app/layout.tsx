@@ -37,10 +37,10 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
-        <SecurityProvider>
+        {/* <SecurityProvider> */}
           {children}
           <Toaster />
-        </SecurityProvider>
+        {/* </SecurityProvider> */}
       </body>
     </html>
   );

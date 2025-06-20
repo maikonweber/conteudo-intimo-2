@@ -63,7 +63,11 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div style={{
+      minHeight: '100vh',
+      backgroundColor: '#000000',
+      color: '#ffffff'
+    }}>
       {/* Background romantic shapes */}
       <div className="absolute inset-0 opacity-15">
         <div className="absolute top-20 right-20 w-32 h-32 bg-french-rose rounded-full animate-pulse"></div>

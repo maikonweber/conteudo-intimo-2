@@ -1,0 +1,230 @@
+/* Random Chat Page Styles */
+.random-chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom, #581c87, #be185d, #1e3a8a);
+  color: #ffffff;
+}
+
+/* Header */
+.random-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.random-chat-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.random-chat-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.random-audio-button {
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.random-audio-button.enabled {
+  background-color: #10b981;
+}
+
+.random-audio-button.disabled {
+  background-color: #4b5563;
+}
+
+.random-audio-button svg {
+  width: 1rem;
+  height: 1rem;
+  color: #ffffff;
+}
+
+/* Messages Container */
+.random-messages-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Empty State */
+.random-empty-state {
+  text-align: center;
+  color: #d1d5db;
+  margin-top: 5rem;
+}
+
+.random-empty-icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: rgba(139, 92, 246, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+}
+
+.random-empty-icon svg {
+  width: 2rem;
+  height: 2rem;
+  color: #a855f7;
+}
+
+.random-empty-title {
+  margin: 0 0 0.5rem 0;
+}
+
+.random-empty-subtitle {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* Messages */
+.random-message-wrapper {
+  display: flex;
+}
+
+.random-message-wrapper.me {
+  justify-content: flex-end;
+}
+
+.random-message-wrapper.other {
+  justify-content: flex-start;
+}
+
+.random-message {
+  max-width: 80%;
+  padding: 0.75rem;
+  border-radius: 1rem;
+}
+
+.random-message.me {
+  background-color: #9333ea;
+  color: #ffffff;
+}
+
+.random-message.other {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  color: #ffffff;
+}
+
+.random-message p {
+  margin: 0;
+}
+
+.random-message audio {
+  width: 100%;
+}
+
+.random-message img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+
+.random-message-time {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Input Area */
+.random-input-area {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.random-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.random-text-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.random-text-input::placeholder {
+  color: #9ca3af;
+}
+
+.random-text-input:focus {
+  ring: 2px solid #9333ea;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px #9333ea;
+}
+
+.random-file-input {
+  display: none;
+}
+
+.random-input-button {
+  padding: 0.75rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.random-input-button.image {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.random-input-button.image:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.random-input-button.mic {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.random-input-button.mic:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.random-input-button.mic.recording {
+  background-color: #ef4444;
+}
+
+.random-input-button.send {
+  background-color: #9333ea;
+}
+
+.random-input-button.send:hover {
+  background-color: #7c3aed;
+}
+
+.random-input-button.send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.random-input-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #ffffff;
+}

@@ -90,9 +90,9 @@ export default function SecurityProvider({ children }: SecurityProviderProps) {
     const handleVisibilityChange = () => {
       if (document.hidden) {
         // Blur content when tab is not visible
-        document.body.classList.add('blur-sm');
+        document.body.style.filter = 'blur(4px)';
       } else {
-        document.body.classList.remove('blur-sm');
+        document.body.style.filter = 'none';
       }
     };
 
@@ -100,11 +100,35 @@ export default function SecurityProvider({ children }: SecurityProviderProps) {
     const addWatermark = () => {
       const watermark = document.createElement('div');
       watermark.id = 'security-watermark';
-      watermark.className = 'fixed inset-0 pointer-events-none z-[9999] bg-gradient-to-br from-french-rose/5 via-carnation-pink/5 to-orchid-pink/5';
+      watermark.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        z-index: 9999;
+        background: linear-gradient(135deg, rgba(255, 93, 143, 0.05), rgba(255, 164, 193, 0.05), rgba(255, 196, 214, 0.05));
+      `;
       
       // Add text watermarks
       const textWatermark = document.createElement('div');
-      textWatermark.className = 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45 text-6xl font-black text-french-rose/10 uppercase tracking-[2rem] font-sans no-select';
+      textWatermark.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        font-size: 3.75rem;
+        font-weight: 900;
+        color: rgba(255, 93, 143, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 2rem;
+        font-family: sans-serif;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+      `;
       textWatermark.textContent = 'CONTEÚDO PROTEGIDO';
       
       watermark.appendChild(textWatermark);
@@ -136,26 +160,40 @@ export default function SecurityProvider({ children }: SecurityProviderProps) {
       if (watermark) watermark.remove();
       
       // Reset body filter
-      document.body.classList.remove('blur-sm');
+      document.body.style.filter = 'none';
     };
   }, []);
 
   const showSecurityWarning = () => {
     // Create warning overlay
     const warningOverlay = document.createElement('div');
-    warningOverlay.className = 'fixed inset-0 bg-black/95 z-[999999] flex items-center justify-center text-french-rose font-sans text-center';
+    warningOverlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--french-rose);
+      font-family: sans-serif;
+      text-align: center;
+    `;
     
     warningOverlay.innerHTML = `
-      <div class="p-8 max-w-lg">
-        <div class="text-6xl mb-4">🚫</div>
-        <h2 class="text-2xl font-black mb-4 uppercase">
+      <div style="padding: 2rem; max-width: 32rem;">
+        <div style="font-size: 3.75rem; margin-bottom: 1rem;">🚫</div>
+        <h2 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem; text-transform: uppercase;">
           AÇÃO NÃO PERMITIDA
         </h2>
-        <p class="text-xl font-bold mb-8">
+        <p style="font-size: 1.25rem; font-weight: 700; margin-bottom: 2rem;">
           Este conteúdo é protegido. Screenshots, ferramentas de desenvolvedor e outras ações não são permitidas.
         </p>
         <button onclick="this.parentElement.parentElement.remove()" 
-          class="bg-french-rose text-white border-none px-8 py-4 text-lg font-bold uppercase cursor-pointer hover:bg-french-rose/80 transition-colors duration-300 clip-diamond">
+          style="background: var(--french-rose); color: white; border: none; padding: 1rem 2rem; font-size: 1.125rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background-color 0.3s ease; clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);">
           ENTENDIDO
         </button>
       </div>
@@ -185,10 +223,33 @@ export default function SecurityProvider({ children }: SecurityProviderProps) {
       {children}
       
       {/* Security overlay with watermark pattern */}
-      <div className="fixed inset-0 pointer-events-none z-[9998] bg-gradient-to-br from-french-rose/2 via-transparent to-carnation-pink/2 bg-[length:100px_100px] animate-gradient" />
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        pointerEvents: 'none',
+        zIndex: 9998,
+        background: 'linear-gradient(135deg, rgba(255, 93, 143, 0.02), transparent, rgba(255, 164, 193, 0.02))',
+        backgroundSize: '100px 100px',
+        animation: 'gradient 15s ease infinite'
+      }} />
       
       {/* Security indicator */}
-      <div className="fixed top-2 right-2 bg-french-rose/90 text-white px-3 py-1 rounded text-xs font-bold pointer-events-none z-[10000]">
+      <div style={{
+        position: 'fixed',
+        top: '0.5rem',
+        right: '0.5rem',
+        background: 'rgba(255, 93, 143, 0.9)',
+        color: 'white',
+        padding: '0.25rem 0.75rem',
+        borderRadius: '0.25rem',
+        fontSize: '0.75rem',
+        fontWeight: 700,
+        pointerEvents: 'none',
+        zIndex: 10000
+      }}>
         ⚠️ CONTEÚDO PROTEGIDO
       </div>
     </>
