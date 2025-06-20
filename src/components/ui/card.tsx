@@ -1,56 +1,102 @@
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
 
-const cardVariants = cva(
-  "rounded-xl border shadow transition-all duration-300 no-select",
-  {
-    variants: {
-      variant: {
-        default: "bg-white border-gray-200 text-black",
-        pink: "bg-orchid-pink border-carnation-pink text-black",
-        gradient: "bg-gradient-pink border-french-rose text-white",
-        brutalist: "bg-misty-rose border-black border-4 brutal-shadow text-black",
-        transparent: "bg-white/10 border-white/20 text-white backdrop-blur-sm",
-      },
-      animation: {
-        none: "",
-        hover: "hover:scale-105 hover:shadow-lg",
-        float: "animate-float",
-        pulse: "hover:animate-pulse",
-        heartbeat: "hover:animate-heartbeat",
-        shake: "animate-shake",
-      }
-    },
-    defaultVariants: {
-      variant: "default",
-      animation: "none",
-    },
-  }
-)
-
-export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'pink' | 'gradient' | 'brutalist' | 'transparent';
+  animation?: 'none' | 'hover' | 'float' | 'pulse' | 'heartbeat' | 'shake';
+}
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, animation, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(cardVariants({ variant, animation }), className)}
-      {...props}
-    />
-  )
+  ({ className, variant = 'default', animation = 'none', style, ...props }, ref) => {
+    const getVariantStyles = () => {
+      const baseStyles = {
+        borderRadius: '12px',
+        border: '1px solid',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        transition: 'all 0.3s ease',
+        userSelect: 'none' as const,
+      };
+
+      const variantStyles = {
+        default: {
+          backgroundColor: 'white',
+          borderColor: '#e5e7eb',
+          color: 'black',
+        },
+        pink: {
+          backgroundColor: '#dda0dd',
+          borderColor: '#ff69b4',
+          color: 'black',
+        },
+        gradient: {
+          background: 'linear-gradient(135deg, #ff69b4, #e91e63, #9c27b0)',
+          borderColor: '#e91e63',
+          color: 'white',
+        },
+        brutalist: {
+          backgroundColor: '#ffe4e1',
+          borderColor: 'black',
+          borderWidth: '4px',
+          boxShadow: '8px 8px 0px rgba(0, 0, 0, 0.8)',
+          color: 'black',
+        },
+        transparent: {
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+          color: 'white',
+          backdropFilter: 'blur(4px)',
+        },
+      };
+
+      const animationStyles = {
+        none: {},
+        hover: {
+          cursor: 'pointer',
+        },
+        float: {
+          animation: 'float 3s ease-in-out infinite',
+        },
+        pulse: {
+          cursor: 'pointer',
+        },
+        heartbeat: {
+          cursor: 'pointer',
+        },
+        shake: {
+          animation: 'shake 0.5s ease-in-out infinite',
+        },
+      };
+
+      return {
+        ...baseStyles,
+        ...variantStyles[variant],
+        ...animationStyles[animation],
+      };
+    };
+
+    return (
+      <div
+        ref={ref}
+        style={{ ...getVariantStyles(), ...style }}
+        {...props}
+      />
+    )
+  }
 )
 Card.displayName = "Card"
 
 const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+>(({ style, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.375rem',
+      padding: '1.5rem',
+      ...style
+    }}
     {...props}
   />
 ))
@@ -59,10 +105,16 @@ CardHeader.displayName = "CardHeader"
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
+>(({ style, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("font-black leading-none tracking-tight uppercase", className)}
+    style={{
+      fontWeight: '900',
+      lineHeight: '1',
+      letterSpacing: '0.05em',
+      textTransform: 'uppercase',
+      ...style
+    }}
     {...props}
   />
 ))
@@ -71,10 +123,15 @@ CardTitle.displayName = "CardTitle"
 const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
+>(({ style, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm font-bold opacity-80", className)}
+    style={{
+      fontSize: '0.875rem',
+      fontWeight: 'bold',
+      opacity: 0.8,
+      ...style
+    }}
     {...props}
   />
 ))
@@ -83,21 +140,35 @@ CardDescription.displayName = "CardDescription"
 const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+>(({ style, ...props }, ref) => (
+  <div 
+    ref={ref} 
+    style={{
+      padding: '1.5rem',
+      paddingTop: 0,
+      ...style
+    }} 
+    {...props} 
+  />
 ))
 CardContent.displayName = "CardContent"
 
 const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+>(({ style, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      padding: '1.5rem',
+      paddingTop: 0,
+      ...style
+    }}
     {...props}
   />
 ))
 CardFooter.displayName = "CardFooter"
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, cardVariants } 
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } 

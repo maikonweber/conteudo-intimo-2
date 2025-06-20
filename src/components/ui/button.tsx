@@ -1,57 +1,133 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 no-select",
-  {
-    variants: {
-      variant: {
-        default: "bg-french-rose text-white shadow hover:bg-french-rose/90 hover:scale-105",
-        destructive: "bg-red-500 text-white shadow-sm hover:bg-red-500/90",
-        outline: "border border-french-rose bg-transparent shadow-sm hover:bg-french-rose hover:text-white",
-        secondary: "bg-carnation-pink text-black shadow-sm hover:bg-carnation-pink/80 hover:scale-105",
-        ghost: "hover:bg-french-rose/20 hover:text-french-rose",
-        link: "text-french-rose underline-offset-4 hover:underline hover:animate-shake",
-        gradient: "bg-gradient-pink text-white shadow-lg hover:bg-gradient-pink-animated hover:scale-105",
-        brutalist: "bg-misty-rose text-black font-black uppercase tracking-wider brutal-shadow hover:scale-105 hover:animate-heartbeat",
-      },
-      size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-12 rounded-lg px-8 text-lg font-bold",
-        xl: "h-16 rounded-xl px-12 text-xl font-black",
-        icon: "h-9 w-9",
-      },
-      animation: {
-        none: "",
-        hover: "hover:animate-pulse",
-        heartbeat: "animate-heartbeat",
-        shake: "hover:animate-shake",
-        float: "animate-float",
-      }
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-      animation: "none",
-    },
-  }
-)
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'gradient' | 'brutalist';
+  size?: 'default' | 'sm' | 'lg' | 'xl' | 'icon';
+  animation?: 'none' | 'hover' | 'heartbeat' | 'shake' | 'float';
+  asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, animation, asChild = false, ...props }, ref) => {
+  ({ variant = 'default', size = 'default', animation = 'none', asChild = false, style, ...props }, ref) => {
+    const getButtonStyles = () => {
+      const baseStyles = {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        whiteSpace: 'nowrap' as const,
+        borderRadius: '6px',
+        fontSize: '0.875rem',
+        fontWeight: '500',
+        transition: 'all 0.3s ease',
+        cursor: 'pointer',
+        border: 'none',
+        userSelect: 'none' as const,
+      };
+
+      const variantStyles = {
+        default: {
+          backgroundColor: '#e91e63',
+          color: 'white',
+          boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        },
+        destructive: {
+          backgroundColor: '#ef4444',
+          color: 'white',
+          boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        },
+        outline: {
+          border: '1px solid #e91e63',
+          backgroundColor: 'transparent',
+          color: '#e91e63',
+          boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        },
+        secondary: {
+          backgroundColor: '#ff69b4',
+          color: 'black',
+          boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        },
+        ghost: {
+          backgroundColor: 'transparent',
+          color: '#e91e63',
+        },
+        link: {
+          backgroundColor: 'transparent',
+          color: '#e91e63',
+          textDecoration: 'underline',
+          textUnderlineOffset: '4px',
+        },
+        gradient: {
+          background: 'linear-gradient(135deg, #ff69b4, #e91e63, #9c27b0)',
+          color: 'white',
+          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        },
+        brutalist: {
+          backgroundColor: '#ffe4e1',
+          color: 'black',
+          fontWeight: '900',
+          textTransform: 'uppercase' as const,
+          letterSpacing: '0.1em',
+          boxShadow: '8px 8px 0px rgba(0, 0, 0, 0.8)',
+        },
+      };
+
+      const sizeStyles = {
+        default: {
+          height: '2.25rem',
+          padding: '0.5rem 1rem',
+        },
+        sm: {
+          height: '2rem',
+          borderRadius: '6px',
+          padding: '0 0.75rem',
+          fontSize: '0.75rem',
+        },
+        lg: {
+          height: '3rem',
+          borderRadius: '8px',
+          padding: '0 2rem',
+          fontSize: '1.125rem',
+          fontWeight: 'bold',
+        },
+        xl: {
+          height: '4rem',
+          borderRadius: '12px',
+          padding: '0 3rem',
+          fontSize: '1.25rem',
+          fontWeight: '900',
+        },
+        icon: {
+          height: '2.25rem',
+          width: '2.25rem',
+          padding: 0,
+        },
+      };
+
+      const animationStyles = {
+        none: {},
+        hover: {},
+        heartbeat: {
+          animation: 'heartbeat 1.5s ease-in-out infinite',
+        },
+        shake: {},
+        float: {
+          animation: 'float 3s ease-in-out infinite',
+        },
+      };
+
+      return {
+        ...baseStyles,
+        ...variantStyles[variant],
+        ...sizeStyles[size],
+        ...animationStyles[animation],
+      };
+    };
+
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, animation, className }))}
+        style={{ ...getButtonStyles(), ...style }}
         ref={ref}
         {...props}
       />
@@ -60,4 +136,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = "Button"
 
-export { Button, buttonVariants } 
+export { Button } 
